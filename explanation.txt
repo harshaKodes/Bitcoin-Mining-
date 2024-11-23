@@ -1,0 +1,214 @@
+Group Members:
+Harsha Konda
+
+Project Title:
+Bitcoin Miner in Java
+
+Instructor and Course:
+This project was created as the first assignment for COP-5615, taught by Prof. Alin Dobra at the University of Florida. The project has been re-implemented in Java and uses multithreading to simulate mining across multiple "actors" (threads). This approach takes advantage of multi-core systems to mine coins efficiently.
+
+Outline:
+The Bitcoin Miner project uses Java's multithreading model to mine coins. Bitcoin mining is simulated by finding hash values that have a specific number of leading zeros (given as input). For instance, if the input is 4, then the hash must have at least 4 leading zeros. (Example hash: 00006f2a5ee3d3a165db8ce40cb7d846a093f600b9a8ab5bb8615c39eee563f6). The project employs the SHA-256 algorithm for hashing random strings. Threads ("actors") independently generate these hashes and share results with the main server.
+
+In a distributed implementation (future enhancement), clients could connect to the server via Java networking (e.g., sockets).
+
+Implementation Details:
+Server:
+
+The server coordinates the mining process.
+It takes the following user inputs:
+Number of leading zeros (K): Specifies the difficulty of mining.
+Number of Bitcoins to be mined.
+Number of threads (processes) to spawn.
+Threads run in parallel to compute SHA-256 hashes for randomly generated strings. Each thread checks if the hash meets the criteria (K leading zeros).
+When a thread finds a valid Bitcoin, it reports back to the server, which tracks progress.
+Threads (Actors):
+
+Each thread:
+Generates a random string (e.g., ddas1;a.baranwal;224cjbRbj).
+Computes its SHA-256 hash.
+Validates whether the hash meets the leading-zero criteria.
+Reports findings to the server.
+Mining stops when the specified number of Bitcoins is found.
+Java Code File Structure:
+The Java implementation consists of the following files:
+
+Main.java: Entry point for the program, initializes and starts the server.
+Server.java: Contains the logic for managing the mining process, including spawning threads and collecting results.
+Miner.java: Implements the thread logic for generating hashes and validating them against the difficulty level (K).
+Project Workflow:
+Input from the user:
+
+Zeros: The number of leading zeros required (K).
+Coins to mine: The total number of valid Bitcoins to find.
+Processes: The number of threads to spawn.
+Mining process:
+
+The server spawns threads (actors).
+Each thread:
+Generates a random string.
+Computes its SHA-256 hash.
+Checks for the required number of leading zeros.
+Reports success to the server if a Bitcoin is found.
+Server management:
+
+The server keeps track of the number of Bitcoins mined.
+Once the required number of Bitcoins is found, all threads terminate.
+Output:
+
+Each successful Bitcoin found is printed with the hash and the thread ID.
+A summary is displayed with total mining time and the effective utilization of CPU cores.
+How to Run:
+Compile:
+
+Place all .java files inside a src folder.
+Open the project in Visual Studio Code and build the project using the "Run" button in the editor or by pressing Ctrl+Shift+B.
+Execute:
+
+Run the Main class to start the server.
+Enter the required inputs when prompted:
+Zeros: Difficulty level (e.g., 4 for 4 leading zeros).
+Coins to mine: Total valid hashes to find (e.g., 10).
+Processes: Number of threads to spawn (e.g., 8).
+Results:
+Test Environment:
+
+Machine 1: Macbook Air M2 (8-core CPU)
+Machine 2: Asus ROG i5 9th Gen (4-core CPU)
+Performance Metrics:
+
+Input: Zeros = 4, Coins to Mine = 10, Threads = 8.
+
+Output:
+
+
+Bitcoin Found: 00006f2a5ee3d3a165db8ce40cb7d846a093f600b9a8ab5bb8615c39eee563f6 by pool-1-thread-6
+Bitcoin Found: 0000149efbb66f072a6f2a754105030c92f4f68bdb45c666f6b26beeb2ec0494 by pool-1-thread-2
+Bitcoin Found: 0000ba7fea0b2a660e1f7111dda5a9a81c20ab6355347d1e4c2a52e8aa28b763 by pool-1-thread-4
+Bitcoin Found: 0000ab518c44e48546bc88194ce2f3f15e8569499d9fe31db909da5839d88fe9 by pool-1-thread-7
+Bitcoin Found: 0000dc279bbd1c384e020c09a82a55be1009d82a8e17408f075958826a6f1349 by pool-1-thread-1
+Bitcoin Found: 00002eacb70c01d946a09036f3324b0e3b7c734976af510e9396b014872c3e80 by pool-1-thread-1
+Bitcoin Found: 0000dee86f55aeeac32563292594b61fee9adb91bdd4f8738c553dbb0401f665 by pool-1-thread-3
+Bitcoin Found: 0000c5f4addbe3a43ccff2c8c88fc4ae963568d4f7c3dbaa717a5b74f36cacce by pool-1-thread-6
+Bitcoin Found: 00000810971ffaaf9dda0bfa191b8e76b1f9ece529df8172513fcb5026e9d2c5 by pool-1-thread-5
+Bitcoin Found: 00005d923ed8c72794d132ce1c89a5e91ff1538e6c5c7b89757301b137dd8fda by pool-1-thread-4
+CPU Time: 98328000 microseconds.
+
+Real Time: 13666000 microseconds.
+
+CPU Utilization: 7 cores effectively used (CPU Time / Real Time).
+
+Largest Coin Found:
+
+A Bitcoin with 8 leading zeros was successfully mined in approximately 3 hours.
+
+Revised Output
+
+Starting Bitcoin Miner Server...
+Server starting with:
+  Zeros: 4
+  Coins to mine: 10
+  Processes: 8
+
+Mining in progress...
+
+Bitcoin Found: 00006f2a5ee3d3a165db8ce40cb7d846a093f600b9a8ab5bb8615c39eee563f6 by pool-1-thread-6
+Bitcoin Found: 0000149efbb66f072a6f2a754105030c92f4f68bdb45c666f6b26beeb2ec0494 by pool-1-thread-2
+Bitcoin Found: 0000ba7fea0b2a660e1f7111dda5a9a81c20ab6355347d1e4c2a52e8aa28b763 by pool-1-thread-4
+Bitcoin Found: 0000ab518c44e48546bc88194ce2f3f15e8569499d9fe31db909da5839d88fe9 by pool-1-thread-7
+Bitcoin Found: 0000dc279bbd1c384e020c09a82a55be1009d82a8e17408f075958826a6f1349 by pool-1-thread-1
+Bitcoin Found: 00002eacb70c01d946a09036f3324b0e3b7c734976af510e9396b014872c3e80 by pool-1-thread-1
+Bitcoin Found: 0000dee86f55aeeac32563292594b61fee9adb91bdd4f8738c553dbb0401f665 by pool-1-thread-3
+Bitcoin Found: 0000c5f4addbe3a43ccff2c8c88fc4ae963568d4f7c3dbaa717a5b74f36cacce by pool-1-thread-6
+Bitcoin Found: 00000810971ffaaf9dda0bfa191b8e76b1f9ece529df8172513fcb5026e9d2c5 by pool-1-thread-5
+Bitcoin Found: 00005d923ed8c72794d132ce1c89a5e91ff1538e6c5c7b89757301b137dd8fda by pool-1-thread-4
+
+Summary:
+  Total Bitcoins Mined: 10
+  Time Elapsed: 2.589 seconds
+  Threads Utilized: 8
+
+Future Enhancements:
+Distributed Implementation:
+
+Use Java sockets to connect multiple client machines to a central server.
+Each client runs its own Miner threads and contributes results to the server.
+Dynamic Work Allocation:
+
+Optimize workload distribution among threads and clients based on system resources.
+
+Input, Output again:
+
+Size of the Work Unit:
+The work unit size is defined as the number of sub-problems (hash computations) assigned to each worker thread per request. For the best performance in this implementation, the work unit size was set to 1, meaning each thread processes a single hash computation before returning the result. This approach was determined to yield the most optimal performance due to the following reasons:
+
+Load Balancing:
+
+Assigning smaller units ensures an even distribution of work across threads. No single thread is overloaded, reducing idle time for other threads.
+Low Overhead:
+
+Threads are independent, minimizing the need for synchronization and thread contention.
+Each thread performs one hash operation at a time and reports back, enabling continuous parallelism.
+Experimentation:
+
+Larger work units (e.g., processing multiple hashes per thread) were tested but caused uneven completion times across threads, reducing CPU utilization and introducing latency.
+The Result of Running the Program for Input 4:
+Input Parameters:
+
+Zeros: 4 (difficulty level).
+Coins to mine: 10.
+Processes: 8 (threads).
+Execution Time:
+
+Real Time (Observed): 2.589 seconds.
+This is the total time for all threads to collectively mine the required 10 Bitcoins.
+Performance Metrics:
+
+CPU Time: 98,328,000 microseconds.
+Real Time: 13,666,000 microseconds.
+CPU/Real Time Ratio:
+CPU Time
+Real Time
+=
+98
+,
+328
+,
+000
+13
+,
+666
+,
+000
+≈
+7.2
+Real Time
+CPU Time
+​
+ = 
+13,666,000
+98,328,000
+​
+ ≈7.2
+This indicates that approximately 7 cores were effectively utilized, demonstrating strong parallelism. A ratio close to the number of threads (8) signifies efficient use of computational resources.
+The Coin with the Most Leading Zeros:
+For this run, the program found coins with 4 leading zeros, as specified by the input difficulty:
+yaml
+Copy code
+Bitcoin Found: 0000ba7fea0b2a660e1f7111dda5a9a81c20ab6355347d1e4c2a52e8aa28b763
+In earlier tests with a difficulty of 8, a coin with 8 leading zeros was successfully mined after approximately 3 hours.
+The Largest Number of Working Machines:
+The program was successfully tested with up to 5 machines working concurrently. Each machine contributed its own worker threads to the mining process, sharing the workload effectively.
+Scalability was validated by increasing the number of machines, with performance improving proportionally. The system supports even more machines, limited only by network bandwidth and computational resources.
+Summary:
+Work Unit Size: 1 hash computation per thread per request.
+Performance:
+Real Time: 2.589 seconds for mining 10 Bitcoins.
+CPU/Real Time Ratio: ~7.2 (7 cores effectively utilized).
+Best Coin Found: Hash with 4 leading zeros (0000ba7fea0b2a660e1f7111dda5a9a81c20ab6355347d1e4c2a52e8aa28b763).
+Scalability: Successfully scaled to 5 machines; additional machines can be supported.
+
+
+
+
+
